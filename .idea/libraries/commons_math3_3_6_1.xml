@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="commons-math3-3.6.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/commons-math3-3.6.1.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/SparseBitSet-1.2.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/curvesapi-1.06.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/commons-collections4-4.4.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/commons-codec-1.15.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/xmlbeans-4.0.0.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/commons-compress-1.20.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/poi-excelant-5.0.0.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/poi-5.0.0.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/poi-examples-5.0.0.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/poi-integration-5.0.0.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/poi-ooxml-5.0.0.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/poi-ooxml-full-5.0.0.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/poi-ooxml-lite-5.0.0.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Studium/4. Semester/Projektmanagment II/Developer/thk-pm2-prototype/lib/poi-scratchpad-5.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
