@@ -4,10 +4,15 @@ package de.thkoeln;
 
 import org.apache.poi.ss.usermodel.*;
 
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
+    static Workbook workbook;
+    static Sheet sheet;
 
     public static void main(String[] args) {
         try {
@@ -22,11 +27,12 @@ public class Main {
             // Read out data from excel sheet via Apache POI
             readExcelFileData(excelFileName);
 
+            List<Row> rows = sortExcelFileData(19);
             // Optimize machine planning and scheduling
             myBasicOptimizer.process();
 
             // Write optimized data back to excel sheet
-            writeExcelFileData();
+            writeExcelFileData("C:\\Users\\Henrik\\Desktop\\Neuer Ordner\\ProductionSheet NEU.xlsx", rows, 1);
 
             System.out.println("Optimization done.");
         } catch (Exception ex) {
@@ -71,24 +77,62 @@ public class Main {
         }
     }
 
+    private static List<Row> sortExcelFileData(int sortColumn)
+    {
+        List<Row> rows = new ArrayList<>();
+        try {
+
+            for (int i = 1; i<sheet.getPhysicalNumberOfRows();i ++ )
+            {
+                rows.add(sheet.getRow(i)); //(new SortRow(sheet.getRow(i).getCell(19).getStringCellValue(), sheet.getRow(i)));
+            }
+            // ToDo: Sortieren bei Zahlenwerten? Keine Ahnung Finn/Hauke
+            rows.sort((r1, r2) -> r1.getCell(sortColumn).getStringCellValue().compareTo(r2.getCell(sortColumn).getStringCellValue()));
+
+        } catch (Exception exp) {
+            System.out.println("Error in writeExcelFileData()");
+            System.out.println("Error details: " + exp.toString());
+        }
+        return rows;
+    }
+
     private static void readExcelFileData(String fileName){
         try {
-            Workbook workbook = WorkbookFactory.create(new File(fileName));
-
-            // this is an example, modify code here
-            Sheet sheet = workbook.getSheetAt(0);
-            Row row = sheet.getRow(1);
-            Cell cell = row.getCell(0);
-
-            System.out.println("Value read (A/2): " + cell.getStringCellValue());
+            workbook = WorkbookFactory.create(new File(fileName));
+            sheet = workbook.getSheetAt(1);
         } catch (Exception exReadExcelFile) {
             System.out.println("Error in readExcelFileData()");
             System.out.println("Error details: " + exReadExcelFile.toString());
         }
     }
 
-    private static void writeExcelFileData(){
+    private static void writeExcelFileData(String filename, List<Row> rows, int startRow){
         try {
+            for (int i = 0; i < rows.size(); i++)
+            {
+                Row row = sheet.getRow(i + startRow);
+                for (int x = 0; x < rows.get(i).getPhysicalNumberOfCells(); x++)
+                {
+                    if (rows.get(i).getCell(x).getCellType() == CellType.STRING) {
+                        row.createCell(x).setCellValue(rows.get(i).getCell(x).getStringCellValue());
+                        //Fall:  Zelle ist ein Buchstabe; Erstellt identische Zelle in identischer Zeile und weißt dieser Zelle ihren entsprechenden Wert zu, dieser Wert wird daraufhin in Buchstaben umgewandelt
+                    } else if (rows.get(i).getCell(x).getCellType() == CellType.NUMERIC) {
+                        row.createCell(x).setCellValue(rows.get(i).getCell(x).getNumericCellValue());
+                        //Fall:  Zelle ist ein Nummererischer Wert; Erstellt identische Zelle in identischer Zeile und weißt dieser Zelle ihren entsprechenden Wert zu, dieser Wert wird daraufhin in Zahl umgewandelt
+                    } else if (rows.get(i).getCell(x).getCellType() == CellType.FORMULA) {
+                        String cellFormula = rows.get(i).getCell(x).getCellFormula();
+                        System.out.println(cellFormula);
+                        row.createCell(x).setCellFormula(cellFormula);
+                        //Fall:  Zelle ist eine Formel; Erstellt identische Zelle in identischer Zeile und weißt dieser Zelle ihren entsprechenden Wert zu, dieser Wert wird daraufhin in Formelwert umgewandelt
+                    } else {
+                        System.out.println(rows.get(i).getCell(x).getCellType());
+                    }
+
+                }
+            }
+            try (FileOutputStream outputStream = new FileOutputStream(filename)) {
+                workbook.write(outputStream);
+            }
             System.out.println("Called writeExcelFileData()");
         } catch (Exception exWriteExcelFile) {
             System.out.println("Error in writeExcelFileData()");
@@ -96,4 +140,4 @@ public class Main {
         }
     }
 }
-Test123
+
